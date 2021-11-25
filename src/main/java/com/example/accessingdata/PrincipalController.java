@@ -23,11 +23,21 @@ public class PrincipalController {
 
     @PostMapping(path = "/add")
     public @ResponseBody String addNovoUsuario(@RequestParam String nome, @RequestParam String email) {
-        Usuario u = new Usuario();
-        u.setNome(nome);
-        u.setEmail(email);
-        uRepository.save(u);
-        return "Ok ao gravar.";
+
+        if(uRepository.findByEmail(email) != null ){
+            return "O email digitado já existe.";
+        }
+
+        try {
+            Usuario u = new Usuario();
+            u.setNome(nome);
+            u.setEmail(email);
+            uRepository.save(u);
+            return "Ok ao gravar.";
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+
     }
 
     @GetMapping(path = "/all")
