@@ -19,9 +19,9 @@ function gravarUsuario() {
 
     const xhttp = new XMLHttpRequest();
     if (id == '') {
-        xhttp.open("POST", "https://qua-209030.herokuapp.com/demo/add?" + url);
+        xhttp.open("POST", "/demo/add?" + url);
     } else {
-        xhttp.open("PUT", `https://qua-209030.herokuapp.com/demo/update/${id}?${url}`);
+        xhttp.open("PUT", `/demo/update/${id}?${url}`);
     }
     xhttp.send();
     xhttp.onload = function () {
@@ -43,7 +43,7 @@ function limparCampos() {
 
 function atualizarTabela() {
     const xhttp = new XMLHttpRequest();
-    xhttp.open("GET", "https://qua-209030.herokuapp.com/demo/all");
+    xhttp.open("GET", "/demo/all");
     xhttp.send();
     xhttp.onload = function () {
         lsUsuario = JSON.parse(this.responseText);
@@ -102,7 +102,7 @@ function apagarUsuario() {
     }
 
     const xhttp = new XMLHttpRequest();
-    xhttp.open("DELETE", "https://qua-209030.herokuapp.com/demo/delete/" + id);
+    xhttp.open("DELETE", "/demo/delete/" + id);
     xhttp.send();
     xhttp.onload = function () {
         alert(this.responseText);

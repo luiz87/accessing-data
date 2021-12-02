@@ -16,23 +16,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
-			.authorizeRequests()
+				.csrf().disable()
+				.authorizeRequests()
 				.antMatchers("login").permitAll()
 				.anyRequest().authenticated()
 				.and()
-			.formLogin()
+				.formLogin()
 				.loginPage("/login")
 				.permitAll()
 				.and()
-			.logout()
+				.logout()
 				.permitAll();
 	}
 
 	@Bean
 	@Override
 	public UserDetailsService userDetailsService() {
-		UserDetails user =
-			 User.withDefaultPasswordEncoder()
+		UserDetails user = User.withDefaultPasswordEncoder()
 				.username("luiz")
 				.password("luiz.123")
 				.roles("USER")
